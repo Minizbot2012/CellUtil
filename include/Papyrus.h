@@ -6,18 +6,19 @@ namespace MPL::Papyrus
 #define STATIC_ARGS RE::StaticFunctionTag*
     std::string GetRegion(RE::StaticFunctionTag*, RE::TESObjectCELL* cl)
     {
-        if (cl->extraList.HasType<RE::ExtraCellSkyRegion>())
+        if (cl != nullptr)
         {
-            auto dat = cl->extraList.GetByType<RE::ExtraCellSkyRegion>();
-            if (dat->skyRegion != nullptr)
+            if (cl->extraList.HasType<RE::ExtraCellSkyRegion>())
             {
-                logger::info("{:X}:{}", dat->skyRegion->GetLocalFormID(), dat->skyRegion->sourceFiles.array->front()->GetFilename());
+                auto dat = cl->extraList.GetByType<RE::ExtraCellSkyRegion>();
+                if (dat->skyRegion != nullptr)
+                {
+                    logger::info("{:X}:{}", dat->skyRegion->GetLocalFormID(), dat->skyRegion->sourceFiles.array->front()->GetFilename());
+                    return clib_util::editorID::get_editorID(dat->skyRegion);
+                }
             }
-            return clib_util::editorID::get_editorID(dat->skyRegion);
         }
-        else {
-            return "";
-        }
+        return "";
     }
 
     void ChangeRegion(RE::StaticFunctionTag*, RE::TESObjectCELL* cl, std::string region)
