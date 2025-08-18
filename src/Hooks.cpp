@@ -7,7 +7,8 @@ namespace MPL::Hooks
         static inline void thunk(Target* a_ref, RE::TESObjectCELL* cl)
         {
             func(a_ref, cl);
-            if(cl!=nullptr) {
+            if (cl != nullptr)
+            {
                 logger::info("CELL CHANGE into {:X}:{}", cl->GetLocalFormID(), cl->sourceFiles.array->front()->GetFilename());
                 Config::StatData::GetSingleton()->cellLoad.QueueEvent(cl);
             }
