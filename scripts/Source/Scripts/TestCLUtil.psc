@@ -8,4 +8,6 @@ endevent
 Event OnCellChange(Cell cl)
     Debug.Notification("CELL CHANGE "+cl.GetFormID())
     Debug.Notification("RGEN EDID "+GetRegion(cl))
+    ChangeRegion(cl, "WeatherWhiterun")
+    Debug.Notification("RGEN EDID "+GetRegion(cl))
 EndEvent
