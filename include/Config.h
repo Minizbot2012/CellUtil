@@ -1,47 +1,10 @@
 #pragma once
 namespace MPL::Config
 {
-    struct ConfigEntry
-    {
-    };
     class StatData : public REX::Singleton<StatData>
     {
-    private:
-        bool config_loaded = false;
-        const static inline std::string config_path = "Data/SKSE/CLUtil";
-        std::vector<ConfigEntry> entries;
-
     public:
         SKSE::RegistrationSet<RE::TESObjectCELL*> cellLoad{ "OnCellChange"sv };
-        inline void LoadConfig()
-        {
-            if (!this->config_loaded)
-            {
-                if (std::filesystem::exists(this->config_path))
-                {
-                    this->config_loaded = true;
-                    for (auto file : std::filesystem::directory_iterator(this->config_path))
-                    {
-                        if (file.path().extension() == ".json")
-                        {
-                            auto cfg = rfl::json::load<std::vector<ConfigEntry>>(file.path().string());
-                            if (cfg)
-                            {
-                                this->entries.insert(this->entries.end(), cfg->begin(), cfg->end());
-                            }
-                            else {
-                                logger::error("Error {}, skipping", cfg.error().what());
-                            }
-                        }
-                    }
-                    logger::info("Loaded {} Entries", this->entries.size());
-                }
-                else {
-                    this->config_loaded = true;
-                    logger::error("Config path does not exist, skipping the loading of records.");
-                }
-            }
-        }
     };
 }  // namespace MPL::Config
 
