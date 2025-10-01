@@ -33,11 +33,13 @@ namespace MPL::Papyrus
                 {
                     logger::info("{:X}:{}", dat->skyRegion->GetLocalFormID(), dat->skyRegion->sourceFiles.array->front()->GetFilename());
                 }
-                else {
+                else
+                {
                     logger::warn("Sky region for {} IS NULL", region);
                 }
             }
-            else {
+            else
+            {
                 auto dat = RE::BSExtraData::Create<RE::ExtraCellSkyRegion>();
                 dat->skyRegion = RE::TESForm::LookupByEditorID<RE::TESRegion>(region);
                 if (dat->skyRegion != nullptr)
@@ -45,7 +47,8 @@ namespace MPL::Papyrus
                     logger::info("Adding sky region {:X}:{}", dat->skyRegion->GetLocalFormID(), dat->skyRegion->sourceFiles.array->front()->GetFilename());
                     cl->extraList.Add(dat);
                 }
-                else {
+                else
+                {
                     logger::warn("Sky region for {} IS NULL", region);
                 }
             }

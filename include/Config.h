@@ -29,16 +29,18 @@ namespace rfl
                 auto dh = RE::TESDataHandler::GetSingleton();
                 return dh->LookupFormID(lfid, file);
             }
-            else {
+            else
+            {
                 auto frm = RE::TESForm::LookupByEditorID(v);
                 if (frm)
                 {
                     return frm->GetFormID();
                 }
-                else {
+                else
+                {
                     return RE::FormID(0);
                 }
             }
         }
     };
-}
+}  // namespace rfl
