@@ -9,7 +9,6 @@ namespace MPL::Hooks
             func(a_ref, cl);
             if (cl != nullptr)
             {
-                logger::info("CELL CHANGE into {:X}:{}", cl->GetLocalFormID(), cl->sourceFiles.array->front()->GetFilename());
                 Config::StatData::GetSingleton()->cellLoad.QueueEvent(cl);
             }
         }
